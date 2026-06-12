@@ -1,0 +1,29 @@
+dex:
+  enabled: false
+
+redis-ha:
+  enabled: false
+
+repoServer:
+  replicas: 1
+
+applicationSet:
+  replicaCount: 1
+
+controller:
+  replicas: 1
+
+server:
+  replicas: 1
+  ingress:
+    enabled: true
+    class: "nginx"
+    hostname: "argocd.localhost"
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    path: "/"
+  extraArgs:
+    - --insecure
+  config:
+    exec.enabled: "true"
